@@ -7,7 +7,21 @@ export default class CarsController {
       const page = request.input('page', 1)
       const limit = 10
 
-      const cars = await Car.query().preload('bids').paginate(page, limit)
+      const cars = await Car.query()
+        .preload('bids', (query) =>
+          query.orderBy([
+            { column: 'amount', order: 'desc' },
+            {
+              column: 'createdAt',
+              order: 'desc',
+            },
+            {
+              column: 'updatedAt',
+              order: 'desc',
+            },
+          ])
+        )
+        .paginate(page, limit)
 
       return {
         data: cars,
