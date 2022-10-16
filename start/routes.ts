@@ -4,4 +4,5 @@ Route.group(() => {
   Route.get('/', async () => {
     return { hello: 'world' }
   })
-}).prefix('api')
+  Route.get('/cars', 'CarsController.index')
+}).prefix('/api/v1')
