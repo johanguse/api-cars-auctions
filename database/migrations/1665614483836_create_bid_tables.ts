@@ -8,8 +8,8 @@ export default class Bid extends BaseSchema {
       table.increments('id').primary()
       table.integer('car_id').unsigned().references('cars.id').onDelete('CASCADE')
       table.integer('amount')
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
     })
   }
 
