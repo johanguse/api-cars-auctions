@@ -5,7 +5,7 @@ export default class CarsController {
   public async index({ request, response }: HttpContextContract) {
     try {
       const page = request.input('page', 1)
-      const limit = 10
+      const limit = request.input('limit', 15)
 
       const cars = await Car.query()
         .preload('bids', (query) =>

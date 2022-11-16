@@ -1,12 +1,16 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, column, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Car from './Car'
 
 export default class Bid extends BaseModel {
-  @column({ isPrimary: true })
-  public id: number
-
   @column()
   public carId: number
+
+  @belongsTo(() => Car)
+  public car: BelongsTo<typeof Car>
+
+  @column({ isPrimary: true })
+  public id: number
 
   @column()
   public amount: number
